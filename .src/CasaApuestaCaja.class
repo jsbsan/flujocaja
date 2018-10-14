@@ -1,0 +1,5 @@
+' Gambas class file
+
+'es parecida a una Fuente de Caja, pero tiene metodos particulares,
+'por el ejmplo Saldo Apostado
+Inherits FuenteCaja

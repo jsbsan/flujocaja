@@ -1,0 +1,50 @@
+' Gambas class file
+
+Property nombre As String
+Private hnombre As String
+
+Private Function nombre_Read() As String
+
+    Return hnombre
+
+End
+
+Private Sub nombre_Write(Value As String)
+
+    hnombre = value
+
+End
+
+Property Saldo As Float
+Private hsaldo As Float
+
+Private Function Saldo_Read() As Float
+
+    Return hsaldo
+
+End
+
+Private Sub Saldo_Write(Value As Float)
+
+    hsaldo = value
+
+End
+
+Public Sub _new(n As String, s As Float)
+
+    hnombre = n
+    hsaldo = s
+
+End
+
+Public Sub ingreso(s As Float)
+
+    hsaldo += s
+
+End
+
+Public Sub retirada(s As Float)
+
+    hsaldo -= s
+
+End

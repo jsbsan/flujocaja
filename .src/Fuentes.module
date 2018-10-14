@@ -1,0 +1,97 @@
+' Gambas module file
+
+Private rutaficherofuentes As String = User.home & "/.ControlFlujoCaja/fuentes.datos"
+
+Public Sub guardardatos(origen As String, destino As String, valor As Float, obs As String)
+
+    Dim contenido As String
+    Dim lineaDatos As String
+
+    lineaDatos = origen & "|"
+    lineaDatos &= destino & "|"
+    lineaDatos &= Str$(valor) & "|"
+    lineaDatos &= obs & "|"
+    lineaDatos &= Format(Now, "yyyy/mm/dd hh:nn:ss") & "\n"
+
+    ComprobarExistenciaFicheroDatos()
+    'leo datos anteriores
+    contenido = File.Load(rutaficherofuentes)
+    'añado datos nuevos
+    contenido &= lineaDatos
+    'guardos datos
+    File.Save(rutaficheroFuentes, contenido)
+    'emitir un evento para actualizar datos
+
+End
+
+Private Sub ComprobarExistenciaFicheroDatos()
+
+    If Not Exist(rutaficheroFuentes) Then
+        'hay que crearlo..
+        Try Mkdir User.home & "/.ControlFlujoCaja" 'creo ruta
+        File.Save(rutaficheroFuentes, "") 'creo archivo vacio
+    Endif
+
+End
+
+Public Sub Recalculo(GridViewFuentes As Gridview)
+
+    Dim contador As Integer
+    Dim contenido As String[]
+    Dim datos As String[]
+
+    Dim origen As String
+    Dim destino As String
+    Dim valor As Float
+    Dim arrayFuentes As FuenteCaja[]
+    'leo el fichero de datos
+    ComprobarExistenciaFicheroDatos()
+
+    contenido = Split(File.Load(rutaficherofuentes), "\n")
+
+    GestorFuentesCaja.reiniciaSaldos()
+
+    contador = -1
+    While contador < contenido.max
+        contador += 1
+
+        datos = Split(contenido[contador], "|")
+        If datos.count = 0 Then Continue
+        origen = datos[0]
+        destino = datos[1]
+        valor = Val(datos[2])
+
+        'usando el gesto de fuente hago los ingresos y retiradas
+        'en el origen se ha producido una retirada del valor
+
+        GestorFuentesCaja.retirada(origen, valor)
+        'en el destino se ha producido un ingreso del valor
+        GestorFuentesCaja.ingreso(destino, valor)
+
+    Wend
+
+    'actualizao gridview los datos
+
+    ArrayFuentes = GestorFuentesCaja.Estado()
+
+    GridViewFuentes.Rows.count = 7
+    contador = -1
+    While contador < ArrayFuentes.max - 1
+        contador += 1
+        With GridViewFuentes
+
+            .[contador, 0].text = arrayFuentes[contador].nombre
+            .[contador, 1].text = Format(arrayFuentes[contador].Saldo, "$0,#.#0")
+
+            If arrayFuentes[contador].Saldo < 0 Then
+                .[contador, 1].foreground = Color.red
+            Endif
+
+        End With
+    Wend
+
+End
+
+Public Sub InicioCaja()
+
+End

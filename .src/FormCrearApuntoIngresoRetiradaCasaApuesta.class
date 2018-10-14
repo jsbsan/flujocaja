@@ -1,0 +1,19 @@
+' Gambas class file
+
+Public Sub ButtonCancelar_Click()
+
+    Me.Close()
+
+End
+
+Public Sub ButtonIngresoCasa_Click()
+
+End
+
+Public Sub Form_Open()
+
+    Me.Title = "Flujo de Caja En Casa de Apuesta"
+    ComboBoxCasa.list = Split(File.Load("casas.txt"), "\n")
+    ComboBoxFuente.List = Split(File.Load("fuentes.txt"), "\n")
+
+End

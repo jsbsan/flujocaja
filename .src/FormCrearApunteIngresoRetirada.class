@@ -1,0 +1,36 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+    Me.Title = "Flujo de Caja En Fuente / Banca"
+    ComboBoxFuentesDestino.List = Split(File.Load("fuentes.txt"), "\n")
+
+    ComboBoxFuentesOrigen.list = Split(File.Load("fuentes.txt"), "\n")
+
+    ComboBoxFuentesOrigen.Text = "6_Otra"
+
+    ValueBoxValor.SetFocus()
+
+End
+
+Public Sub ButtonCancelar_Click()
+
+    Me.Close()
+
+End
+
+Public Sub ButtonAceptar_Click()
+
+    'datos a guardar
+    'origen|destino|importe|observaciones
+
+    'comprobacion de origen destino
+    If ComboBoxFuentesOrigen.text = ComboBoxFuentesDestino.text Then
+        Message.Info("No se admite mismo origen-destino")
+        Return 'salgo sin hacer nada
+    Endif
+
+    Fuentes.guardardatos(ComboBoxFuentesOrigen.text, ComboBoxFuentesDestino.text, ValueBoxValor.value, TextAreaObsevaciones.text)
+    Me.Close()
+
+End

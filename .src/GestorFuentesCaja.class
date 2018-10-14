@@ -1,0 +1,90 @@
+' Gambas class file
+
+Create Static
+
+Public ArrayFuentes As New FuenteCaja[]
+
+Public Sub _new()
+
+    Dim FuenteTemporal As FuenteCaja
+    Dim nombresFuentes As String[]
+
+    Dim a As Integer
+
+    'cuando se crea un gestor de fuentes, crea un array de clases Fuentes
+
+    'leo el archivo de fuentes.txt, y creo sus correspondientes fuentes
+
+    nombresFuentes = Split(File.Load("fuentes.txt"), "\n")
+
+    For a = 0 To nombresFuentes.Max
+        FuenteTemporal = New FuenteCaja(nombresFuentes[a], 0)
+
+        ArrayFuentes.Add(FuenteTemporal)
+        'borro instancia para volverla a usar
+        FuenteTemporal = Null
+
+    Next
+
+End
+
+'hacer un ingreso, dado el nombre de  una fuente en concreta
+
+Public Sub ingreso(nombre As String, valor As Float)
+
+    Dim a As Integer
+    Dim FuenteTemporal As FuenteCaja
+    'busco fuente  por el nombre y le asigno el valor
+
+    For a = 0 To ArrayFuentes.Max
+        If ArrayFuentes[a].nombre = nombre Then
+            ArrayFuentes[a].ingreso(valor)
+            Break
+        Endif
+
+    Next
+
+End
+
+'hacer una retirdada,dado el nombre de una fuente en concreta
+
+Public Sub retirada(nombre As String, valor As Float)
+
+    Dim a As Integer
+    Dim FuenteTemporal As FuenteCaja
+    'busco fuente  por el nombre y le asigno el valor
+
+    For a = 0 To ArrayFuentes.Max
+        If ArrayFuentes[a].nombre = nombre Then
+            ArrayFuentes[a].retirada(valor)
+            Break
+        Endif
+
+    Next
+
+End
+
+Public Function Estado() As FuenteCaja[]
+
+    Dim a As Integer
+
+    Debug "*******************************"
+    Debug "Estado de las Fuentes"
+    For a = 0 To ArrayFuentes.Max
+        Debug "Fuente:", ArrayFuentes[a].nombre, "Saldo:", ArrayFuentes[a].saldo
+    Next
+    Debug "*******************************"
+
+    Return ArrayFuentes
+
+End
+
+Public Sub ReiniciaSaldos()
+
+    Dim a As Integer
+
+    For a = 0 To ArrayFuentes.Max
+        ArrayFuentes[a].saldo = 0
+    Next
+
+End

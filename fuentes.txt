@@ -1,0 +1,7 @@
+0_Paypal
+1_Bankia Julio
+2_Bankia Eva
+3_OpenBank Julio
+4_OpenBank Eva
+5_Caixa
+6_Otra

@@ -1,0 +1,44 @@
+' Gambas class file
+
+Public Sub ButtonCrearApunte_Click()
+
+    FormCrearApunteIngresoRetirada.ShowModal()
+    Fuentes.Recalculo(GridViewFuentes)
+
+End
+
+Public Sub ButtonRecalculoFuentes_Click()
+
+    Fuentes.Recalculo(GridViewFuentes)
+
+End
+
+Public Sub Form_Open()
+
+    defineGridViewFuentes()
+
+End
+
+Public Sub defineGridViewFuentes()
+
+    With GridViewFuentes
+        .header = 3
+        .rows.count = 0
+        .columns.count = 2
+        .Columns[0].title = "Fuente"
+        .Columns[1].title = "Saldo"
+        .columns[0].width = 150
+        .columns[1].width = 100
+        .Columns[1].Alignment = Align.Right
+        .font.name = "Sans"
+        .font.size = 9
+
+    End With
+
+End
+
+Public Sub ButtonCrearCasa_Click()
+
+    FormCrearApuntoIngresoRetiradaCasaApuesta.ShowModal()
+
+End
