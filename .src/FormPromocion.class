@@ -1,0 +1,8 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+        ComboBoxCasa.list = Split(File.Load("casas.txt"), "\n")
+
+
+End

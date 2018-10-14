@@ -136,3 +136,9 @@ Public Sub ButtonRecalculo_Click()
     'y para la estimacion de dinero en juego, comprobar apuestas
 
 End
+
+Public Sub ButtonCrearApuesta_Click()
+
+    FormPromocion.ShowModal()
+
+End

@@ -1,0 +1,14 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,111,64)
+  { TextArea1 TextArea
+    MoveScaled(7,5,87,12)
+    Text = ("Casa/Mercado/Cantidad/Cuota/Premio/tipo [freebet/Normal] / Modo [Principal / Complementaria] /fecha cuando de juega /fecha Realizacion Apuesta\n\nEstado: [Pendiente / Finalizada / Pendiente que me la den Freebet]\n")
+    Wrap = True
+  }
+  { TextArea2 TextArea
+    MoveScaled(9,24,55,23)
+    Text = ("Tipo Pormocion:\nMe dan apuesta gratis si pierdo, y cumple condiciones\nMe dan apuesta gratis si gano, y cumple condiciones\nMe dan apuesta gratis, cumpliendo condiciones")
+  }
+}

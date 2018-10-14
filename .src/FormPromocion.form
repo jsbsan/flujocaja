@@ -1,0 +1,71 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,90,64)
+  { ComboBoxCasa ComboBox
+    MoveScaled(18,8,25,5)
+    ReadOnly = True
+  }
+  { Label1 Label
+    MoveScaled(2,0,22,5)
+    Font = Font["Bold,Italic,Underline,+6"]
+    Text = ("Promoción")
+  }
+  { Label2 Label
+    MoveScaled(3,8,14,5)
+    Text = ("Casa de Apuesta:")
+  }
+  { Label3 Label
+    MoveScaled(46,8,14,5)
+    Text = ("Nº Identificativo:")
+  }
+  { TextBox1 TextBox
+    MoveScaled(62,8,9,6)
+  }
+  { Label4 Label
+    MoveScaled(3,43,20,5)
+    Text = ("Ruta Hoja De Calculo:")
+  }
+  { Label5 Label
+    MoveScaled(3,16,21,5)
+    Text = ("Nombre de Promoción:")
+  }
+  { TextBox2 TextBox
+    MoveScaled(24,16,65,5)
+  }
+  { Label6 Label
+    MoveScaled(3,23,15,5)
+    Text = ("Reglas Promoción:")
+  }
+  { TextAreaResumenReglas TextArea
+    MoveScaled(3,32,86,9)
+  }
+  { Label7 Label
+    MoveScaled(3,49,20,6)
+    Text = ("Periodo de Valided:")
+  }
+  { DateBox1 DateBox
+    MoveScaled(17,55,22,4)
+  }
+  { DirBox1 DirBox
+    MoveScaled(24,23,19,4)
+  }
+  { DirBox2 DirBox
+    MoveScaled(24,43,28,4)
+  }
+  { DateBox2 DateBox
+    MoveScaled(50,55,20,4)
+  }
+  { Label8 Label
+    MoveScaled(3,29,12,3)
+    Text = ("Resumen:")
+  }
+  { Label9 Label
+    MoveScaled(40,55,9,5)
+    Text = ("hasta") & "..."
+  }
+  { Label10 Label
+    MoveScaled(6,55,9,5)
+    Text = ("desde.") & "..."
+  }
+}
