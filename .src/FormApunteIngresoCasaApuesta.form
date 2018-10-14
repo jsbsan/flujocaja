@@ -1,46 +1,47 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,75,33)
+  MoveScaled(0,0,80,26)
+  Icon = Picture["flecha1_32x32.png"]
   { Label1 Label
-    MoveScaled(13,10,13,5)
+    MoveScaled(32,1,13,5)
     Text = ("Cantidad:")
     Alignment = Align.Right
   }
   { ComboBoxCasa ComboBox
-    MoveScaled(29,2,26,5)
+    MoveScaled(53,6,26,5)
     ReadOnly = True
   }
-  { ValueBox1 ValueBox
-    MoveScaled(29,10,14,5)
+  { ValueBoxCantidad ValueBox
+    MoveScaled(35,6,14,5)
   }
   { ComboBoxFuente ComboBox
-    MoveScaled(29,17,26,5)
+    MoveScaled(2,6,26,5)
     ReadOnly = True
   }
   { ButtonIngresoCasa Button
-    MoveScaled(3,24,22,7)
+    MoveScaled(55,17,22,6)
     Text = ("Ingreso a Casa")
     Picture = Picture["icon:/22/add"]
   }
   { TextLabel1 TextLabel
-    MoveScaled(5,3,23,4)
+    MoveScaled(57,2,20,4)
     Text = ("Casa de Apuesta:")
     Alignment = Align.Right
   }
   { ButtonCancelar Button
-    MoveScaled(30,24,15,7)
+    MoveScaled(35,17,15,6)
     Text = ("Cancelar")
     Picture = Picture["icon:/22/cancel"]
   }
-  { ButtonRetirada Button
-    MoveScaled(48,24,25,7)
-    Text = ("Retirada a Fuente/Caja")
-    Picture = Picture["icon:/22/remove"]
-  }
   { TextLabel2 TextLabel
-    MoveScaled(4,17,23,4)
+    MoveScaled(-4,1,23,4)
     Text = ("Fuente / Banca:")
     Alignment = Align.Right
+  }
+  { PictureBox1 PictureBox
+    MoveScaled(11,17,8,5)
+    Picture = Picture["flecha1_32x32.png"]
+    Stretch = True
   }
 }

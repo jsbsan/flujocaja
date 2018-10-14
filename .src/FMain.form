@@ -1,58 +1,60 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,146,65)
+  MoveScaled(0,0,146,82)
   Icon = Picture["caja fuerte.jpg"]
   { Panel1 Panel
-    MoveScaled(1,1,41,25)
+    MoveScaled(1,1,32,25)
     Border = Border.Plain
     { Label1 Label
-      MoveScaled(4,10,19,3)
+      MoveScaled(1,11,19,3)
       Font = Font["+2"]
       Text = ("Dinero Disponible:")
       Alignment = Align.Right
     }
     { Label2 Label
-      MoveScaled(4,15,19,3)
+      MoveScaled(-4,18,19,3)
       Font = Font["+2"]
       Text = ("Dinero Usado:")
       Alignment = Align.Right
     }
     { LabelDineroDisponible Label
-      MoveScaled(25,10,11,3)
+      MoveScaled(14,14,14.2857,3)
       Font = Font["+2"]
+      Background = &H00FF00&
       Text = ("0.00 €")
-      Alignment = Align.Center
+      Alignment = Align.Right
     }
     { LabelDineroUsable Label
-      MoveScaled(25,15,11,3)
+      MoveScaled(14,21,14.2857,3)
       Font = Font["+2"]
+      Background = &HFFFF00&
       Text = ("0.00 €")
-      Alignment = Align.Center
+      Alignment = Align.Right
     }
     { Label3 Label
-      MoveScaled(4,3,10,4)
+      MoveScaled(1,1,10,4)
       Font = Font["+3"]
       Text = ("FECHA:")
     }
-    { LabelDineroDisponible2 Label
-      MoveScaled(13,3,27,4)
+    { LabelFechaActual Label
+      MoveScaled(2,5,27,4)
       Font = Font["+2"]
       Text = ("DD / mm / yyyy semana")
       Alignment = Align.Center
     }
     { ButtonRecalculo Button
-      MoveScaled(37,20,4,5)
+      MoveScaled(23,0,4,5)
       Picture = Picture["icon:/22/calculator"]
     }
   }
-  { ButtonCrearApunte Button
-    MoveScaled(1,29,42,6)
-    Text = ("Crear Apunte Ingreso/Retirada de Fuente")
+  { ButtonCrearApunteCaja Button
+    MoveScaled(1,27,32.1429,6)
+    Text = ("Ingreso/Retirada de Fuente")
     Picture = Picture["dinero.png"]
   }
   { Panel2 Panel
-    MoveScaled(45,34,50,31)
+    MoveScaled(35,1,50,31)
     Border = Border.Plain
     { GridViewFuentes GridView
       MoveScaled(2,4,46,25)
@@ -67,29 +69,60 @@
     }
   }
   { ButtonConsultasPendientes Button
-    MoveScaled(1,57,42,7)
+    MoveScaled(1,58,32.1429,6)
     Text = ("Consultas Apuestas Pendientes")
     Picture = Picture["request-report32x32.png"]
   }
   { ButtonCrearApuesta Button
-    MoveScaled(1,47,42,8)
-    Text = ("Crear Apuesta")
+    MoveScaled(1,50,32.1429,6)
+    Text = ("Crear Promoción")
     Picture = Picture["apuesta sports-icon32x32.png"]
   }
   { Panel3 Panel
-    MoveScaled(45,0,98,33)
+    MoveScaled(35,33,50,48)
     Border = Border.Plain
     { GridViewCasasApuestas GridView
-      MoveScaled(2,4,94,27)
+      MoveScaled(2,4,46,43)
     }
     { Label5 Label
-      MoveScaled(3,1,93,3)
+      MoveScaled(7,0,93,3)
       Text = ("Estado de las Casas de Apuesta")
     }
+    { ButtonRecalculoCasasApuesta Button
+      MoveScaled(45,42,4,5)
+      Picture = Picture["icon:/22/calculator"]
+    }
   }
-  { ButtonCrearCasa Button
-    MoveScaled(1,37,42,6)
-    Text = ("Crear Apunte Ingreso/Retirada de Casa")
-    Picture = Picture["dinero.png"]
+  { ButtonIngresoCasa Button
+    MoveScaled(1,35,32.1429,5)
+    Text = ("Ingreso a Casa")
+    Picture = Picture["flecha1_32x32.png"]
+  }
+  { ButtonRetiradaCasa Button
+    MoveScaled(1,42,32.1429,5)
+    Text = ("Retirada de Casa")
+    Picture = Picture["flecha2_32x32.png"]
+  }
+  { Panel4 Panel
+    MoveScaled(86,1,58,31)
+    Border = Border.Plain
+    { GridViewAgenda GridView
+      MoveScaled(1,4,56,25)
+    }
+    { Label6 Label
+      MoveScaled(10,0,29,4)
+      Text = ("Agenda")
+    }
+  }
+  { Panel5 Panel
+    MoveScaled(86,33,59,48)
+    Border = Border.Plain
+    { GridViewPromociones GridView
+      MoveScaled(1,4,57,43)
+    }
+    { Label7 Label
+      MoveScaled(10,0,29,4)
+      Text = ("Promociones")
+    }
   }
 }

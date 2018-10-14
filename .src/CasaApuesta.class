@@ -1,0 +1,20 @@
+' Gambas class file
+
+Inherits FuenteCaja
+
+'tiene ademas la propiedad de "Saldo en apostado..."
+
+Property SaldoApostado As Float
+Private hsaldoApostado As Float
+
+Private Function SaldoApostado_Read() As Float
+
+    Return hsaldoApostado
+
+End
+
+Private Sub SaldoApostado_Write(Value As Float)
+
+    hsaldoApostado = value
+
+End

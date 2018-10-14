@@ -1,0 +1,47 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,83,25)
+  Icon = Picture["flecha2_32x32.png"]
+  { Label1 Label
+    MoveScaled(33,0,13,5)
+    Text = ("Cantidad:")
+    Alignment = Align.Right
+  }
+  { ComboBoxCasa ComboBox
+    MoveScaled(1,6,26,5)
+    ReadOnly = True
+  }
+  { ValueBoxCantidad ValueBox
+    MoveScaled(35,6,14,5)
+  }
+  { ComboBoxFuente ComboBox
+    MoveScaled(53,6,26,5)
+    ReadOnly = True
+  }
+  { TextLabel1 TextLabel
+    MoveScaled(0,1,20,4)
+    Text = ("Casa de Apuesta:")
+    Alignment = Align.Right
+  }
+  { ButtonCancelar Button
+    MoveScaled(34,17,15,6)
+    Text = ("Cancelar")
+    Picture = Picture["icon:/22/cancel"]
+  }
+  { ButtonRetirada Button
+    MoveScaled(53,17,25,6)
+    Text = ("Retirada a Fuente/Caja")
+    Picture = Picture["icon:/22/remove"]
+  }
+  { TextLabel2 TextLabel
+    MoveScaled(51,1,23,4)
+    Text = ("Fuente / Banca:")
+    Alignment = Align.Right
+  }
+  { PictureBox1 PictureBox
+    MoveScaled(12,18,8,5)
+    Picture = Picture["flecha2_32x32.png"]
+    Stretch = True
+  }
+}

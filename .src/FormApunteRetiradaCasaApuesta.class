@@ -1,0 +1,33 @@
+' Gambas class file
+
+Public Sub ButtonCancelar_Click()
+
+    Me.Close()
+
+End
+
+Public Sub ButtonIngresoCasa_Click()
+
+End
+
+Public Sub Form_Open()
+
+    Me.Title = "Flujo de Caja En Casa de Apuesta: Retirada"
+    ComboBoxCasa.list = Split(File.Load("casas.txt"), "\n")
+    ComboBoxFuente.List = Split(File.Load("fuentes.txt"), "\n")
+
+End
+
+Public Sub ButtonRetirada_Click()
+
+    Dim textoDiaHora As String = Format(Now, "yyyy/mm/dd hh:nn:ss")
+
+    'hacer una retirada del dinero de la fuente
+    Fuentes.guardardatos("6_Otra", ComboBoxFuente.text, ValueBoxCantidad.value, "Desde " & ComboBoxCasa.text & " a " & ComboBoxFuente.text & " el dia " & textoDiaHora)
+
+    'hacer un ingreso en la Casa de Apuesta
+    CasasApuestas.guardardatos(ComboBoxCasa.text, "6_Otra", ValueBoxCantidad.value, "Desde " & ComboBoxCasa.text & " a " & ComboBoxFuente.text & " el dia " & textoDiaHora)
+
+    Me.Close()
+
+End

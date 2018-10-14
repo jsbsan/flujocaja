@@ -1,6 +1,6 @@
 ' Gambas module file
 
-Private rutaficherofuentes As String = User.home & "/.ControlFlujoCaja/fuentes.datos"
+Private rutaficherofuentes As String = User.home & "/.ControlFlujoCaja/casas.datos"
 
 Public Sub guardardatos(origen As String, destino As String, valor As Float, obs As String)
 
@@ -37,23 +37,17 @@ End
 Public Sub Recalculo(GridViewFuentes As Gridview)
 
     Dim contador As Integer
-    Dim contenido As String[]
-    Dim datos As String[]
-
-    Dim origen As String
-    Dim destino As String
-    Dim valor As Float
-    Dim arrayFuentes As FuenteCaja[]
+    Dim arrayFuentes As CasaApuesta[]
     'leo el fichero de datos
     ComprobarExistenciaFicheroDatos()
 
-    GestorFuentesCaja.HacerCalculos(rutaficherofuentes)
+    GestorCasaDeApuestas.HacerCalculos(rutaficherofuentes)
 
     'actualizao gridview los datos
 
-    ArrayFuentes = GestorFuentesCaja.Estado()
+    ArrayFuentes = GestorCasaDeApuestas.Estado()
 
-    GridViewFuentes.Rows.count = 7
+    GridViewFuentes.Rows.count = arrayFuentes.count
     contador = -1
     While contador < ArrayFuentes.max - 1
         contador += 1

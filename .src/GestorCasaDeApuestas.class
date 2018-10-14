@@ -1,0 +1,151 @@
+' Gambas class file
+
+Create Static
+
+Public ArrayCasas As New CasaApuesta[]
+
+Public Sub _new()
+
+    Dim FuenteTemporal As CasaApuesta
+    Dim nombresFuentes As String[]
+
+    Dim a As Integer
+
+    'cuando se crea un gestor de fuentes, crea un array de clases Fuentes
+
+    'leo el archivo de fuentes.txt, y creo sus correspondientes fuentes
+
+    nombresFuentes = Split(File.Load("casas.txt"), "\n")
+
+    For a = 0 To nombresFuentes.Max
+        FuenteTemporal = New CasaApuesta(nombresFuentes[a], 0)
+
+        ArrayCasas.Add(FuenteTemporal)
+        'borro instancia para volverla a usar
+        FuenteTemporal = Null
+
+    Next
+
+End
+
+'hacer un ingreso, dado el nombre de  una fuente en concreta
+
+Public Sub ingreso(nombre As String, valor As Float)
+
+    Dim a As Integer
+    Dim FuenteTemporal As CasaApuesta
+    'busco fuente  por el nombre y le asigno el valor
+
+    For a = 0 To ArrayCasas.Max
+        If ArrayCasas[a].nombre = nombre Then
+            ArrayCasas[a].ingreso(valor)
+            Break
+        Endif
+
+    Next
+
+End
+
+'hacer una retirdada,dado el nombre de una fuente en concreta
+
+Public Sub retirada(nombre As String, valor As Float)
+
+    Dim a As Integer
+    Dim FuenteTemporal As CasaApuesta
+    'busco fuente  por el nombre y le asigno el valor
+
+    For a = 0 To ArrayCasas.Max
+        If ArrayCasas[a].nombre = nombre Then
+            ArrayCasas[a].retirada(valor)
+            Break
+        Endif
+
+    Next
+
+End
+
+Public Function Estado() As CasaApuesta[]
+
+    Dim a As Integer
+
+    Debug "*******************************"
+    Debug "Estado de las Fuentes"
+    For a = 0 To ArrayCasas.Max
+        Debug "Fuente:", ArrayCasas[a].nombre, "Saldo:", ArrayCasas[a].saldo, "Saldo En Juego:", ArrayCasas[a].SaldoApostado
+    Next
+    Debug "*******************************"
+
+    Return ArrayCasas
+
+End
+
+Public Sub ReiniciaSaldos()
+
+    Dim a As Integer
+
+    For a = 0 To ArrayCasas.Max
+        ArrayCasas[a].saldo = 0
+        ArrayCasas[a].SaldoApostado = 0
+    Next
+
+End
+
+Public Function SumaSaldo() As Float
+
+    Dim a As Integer
+    Dim sumatorio As Float
+
+    For a = 0 To ArrayCasas.Max
+        sumatorio += ArrayCasas[a].saldo
+    Next
+    Debug "*******************************"
+
+    Return sumatorio
+
+End
+
+Public Function SumaSaldoApostado() As Float
+
+    Dim a As Integer
+    Dim sumatorio As Float
+
+    For a = 0 To ArrayCasas.Max
+        sumatorio += ArrayCasas[a].SaldoApostado
+    Next
+    Debug "*******************************"
+
+    Return sumatorio
+
+End
+
+Public Sub HacerCalculos(rutaficherofuentes As String)
+
+    Dim contador As Integer
+    Dim contenido As String[]
+    Dim datos As String[]
+
+    Dim origen As String
+    Dim destino As String
+    Dim valor As Float
+
+    contenido = Split(File.Load(rutaficherofuentes), "\n")
+
+    GestorCasaDeApuestas.reiniciaSaldos()
+
+    contador = -1
+    While contador < contenido.max
+        contador += 1
+
+        datos = Split(contenido[contador], "|")
+        If datos.count = 0 Then Continue
+        origen = datos[0] 'Si es "6_Otra' -> no tratar aqui
+        destino = datos[1] 'Si es "6_Otra' -> no tratar aqui
+        valor = Val(datos[2])
+
+        If datos[0] <> "6_Otra" Then GestorCasaDeApuestas.retirada(origen, valor)
+        'en el destino se ha producido un ingreso del valor
+        If datos[1] <> "6_Otra" Then GestorCasaDeApuestas.ingreso(destino, valor)
+
+    Wend
+
+End

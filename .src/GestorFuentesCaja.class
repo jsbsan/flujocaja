@@ -88,3 +88,53 @@ Public Sub ReiniciaSaldos()
     Next
 
 End
+
+Public Sub HacerCalculos(rutaficherofuentes As String)
+
+    Dim contenido As String[]
+    Dim contador As Integer
+    Dim datos As String[]
+    Dim origen As String
+    Dim destino As String
+    Dim valor As Float
+
+    contenido = Split(File.Load(rutaficherofuentes), "\n")
+
+    GestorFuentesCaja.reiniciaSaldos()
+
+    contador = -1
+    While contador < contenido.max
+        contador += 1
+
+        datos = Split(contenido[contador], "|")
+        If datos.count = 0 Then Continue
+        origen = datos[0]
+        destino = datos[1]
+        valor = Val(datos[2])
+
+        'usando el gesto de fuente hago los ingresos y retiradas
+        'en el origen se ha producido una retirada del valor
+
+        GestorFuentesCaja.retirada(origen, valor)
+        'en el destino se ha producido un ingreso del valor
+        GestorFuentesCaja.ingreso(destino, valor)
+
+    Wend
+
+End
+
+Public Function SumaSaldo() As Float
+
+    Dim a As Integer
+    Dim sumatorio As Float
+
+    For a = 0 To ArrayFuentes.Max
+        If ArrayFuentes[a].nombre <> "6_Otra" Then
+            sumatorio += ArrayFuentes[a].saldo
+        Endif
+    Next
+    Debug "*******************************"
+
+    Return sumatorio
+
+End
