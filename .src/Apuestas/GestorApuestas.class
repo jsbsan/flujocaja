@@ -1,0 +1,29 @@
+' Gambas class file
+
+Public ArrayApuestas As New Apuesta[]
+
+Public Function importeApostado(fecha As Date) As Float 'valor de las apuestas
+
+    Dim apu As Apuesta
+    Dim total As Float
+
+    For Each apu In ArrayApuestas
+        total += apu.CalculoImporteApuesta(fecha)
+    Next
+
+    Return total
+
+End
+
+Public Function importeJugado(fecha As Date) As Float
+
+    Dim apu As Apuesta
+    Dim total As Float
+
+    For Each apu In ArrayApuestas
+        total += apu.CalculoBenerficio(fecha)
+    Next
+
+    Return total
+
+End

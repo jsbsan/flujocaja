@@ -1,0 +1,32 @@
+' Gambas module file
+
+Public Sub main()
+
+    Dim contador As Integer
+    Dim apu As Apuesta
+    Dim GestorApuestaTemporal As New GestorApuestas
+    Dim a As Integer
+
+    Randomize
+    Print "hola mundo. Test Array de Apuestas"
+
+    'creo 10 apuestas
+    For a = 0 To 9
+        apu = New Apuesta(Int(Rnd(1, 10)), 1, Date(2018, 10, Int(Rnd(1, 10))), ClaseApuesta.normal, "", "")
+
+        GestorApuestaTemporal.ArrayApuestas.add(apu)
+        apu = Null
+    Next
+
+    For a = 1 To 10
+        Print "Apuestas en fecha :"; Date(2018, 10, a), GestorApuestaTemporal.importeApostado(Date(2018, 10, a)), GestorApuestaTemporal.importeJugado(Date(2018, 10, a))
+    Next
+
+    Print "Importe Apostado", "cuota", "fecha", "tipo"
+    For a = 0 To 9
+
+        Print GestorApuestaTemporal.ArrayApuestas[a].ImporteApuesta, GestorApuestaTemporal.ArrayApuestas[a].cuota, GestorApuestaTemporal.ArrayApuestas[a].fechaEvento, GestorApuestaTemporal.ArrayApuestas[a].tipo
+
+    Next
+
+End

@@ -1,0 +1,148 @@
+' Gambas class file
+
+Property referencia As String ''nombre o ruta de la referencia de la promocion
+Private hreferencia As String
+
+Private Function referencia_Read() As String
+
+    Return hreferencia
+
+End
+
+Private Sub referencia_Write(Value As String)
+
+    hreferencia = value
+
+End
+
+Property mercado As String ''mercado donde se aplica la apuesta 1x2.Empate. / 1x2.2.Valencia
+
+Private hmercado As String
+
+Private Function mercado_Read() As String
+
+    Return hmercado
+
+End
+
+Private Sub mercado_Write(Value As String)
+
+    hmercado = value
+
+End
+
+Property ImporteApuesta As Float
+Private hImporteApuesta As Float
+
+Private Function ImporteApuesta_Read() As Float
+
+    Return hImporteApuesta
+
+End
+
+Private Sub ImporteApuesta_Write(Value As Float)
+
+    hImporteApuesta = Value
+
+End
+
+Property cuota As Float
+Private hcuota As Float
+
+Private Function cuota_Read() As Float
+
+    Return hcuota
+
+End
+
+Private Sub cuota_Write(Value As Float)
+
+    hcuota = Value
+
+End
+
+Property fechaEvento As Date ''fecha cuando se juega el partido
+Private hfechaEvento As Date
+
+Property tipo As Integer ''1: normal, 2: cubridora, 3: freebet
+Private htipo As Integer
+
+Public Sub CalculoImporteApuesta(fecha As Date) As Float
+
+    Dim beneficio As Float
+
+    If fecha < hfechaEvento Then
+        Return Me.ImporteApuesta
+    Else
+        Return 0
+    Endif
+
+End
+
+Public Sub CalculoBenerficio(Optional fecha As Date) As Float
+
+    Dim beneficio As Float
+
+    Select Case htipo
+        Case 0
+            Debug "Error: tipo no definido de la apuesta"
+        Case 1 'normal
+            beneficio = hImporteApuesta * hcuota
+
+        Case 2 'cubridora
+            beneficio = 0
+
+        Case 3 'freebet
+            beneficio = hImporteApuesta * hcuota - hImporteApuesta
+
+    End Select
+
+    If fecha = Null Then
+
+        Return beneficio
+    Endif
+
+    If fecha < hfechaEvento Then
+        Return 0 'todavia no se ha jugado o es el mismo dia
+    Else
+
+        Return beneficio
+
+    Endif
+
+End
+
+Private Function fechaEvento_Read() As Date
+
+    Return hfechaEvento
+
+End
+
+Private Sub fechaEvento_Write(Value As Date)
+
+    hfechaEvento = Value
+
+End
+
+Private Function tipo_Read() As Integer
+
+    Return htipo
+
+End
+
+Private Sub tipo_Write(Value As Integer)
+
+    htipo = value
+
+End
+
+Public Sub _new(Importe As Float, cuota As Float, fecha As Date, tipo As Integer, mercado As String, referencia As String) ''Importe de lo apostado, Cuota de la apuesta,Fecha del evento cuando se juega,tipo [normal,cubridora o freebet]
+
+    Me.ImporteApuesta = Importe
+    Me.cuota = cuota
+    Me.fechaEvento = fecha
+    Me.tipo = tipo
+    Me.referencia = referencia
+    Me.mercado = mercado
+
+End

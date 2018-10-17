@@ -1,0 +1,7 @@
+' Gambas class file
+
+Create Static
+
+Public normal As Integer = 1 'tipo Normal
+Public cubridora As Integer = 2 'tipo cubridora: Cubre a una apuesta (ya sea normal o freebet) (complementa a otras)
+Public freebet As Integer = 3 'tipo freebet
