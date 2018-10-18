@@ -21,7 +21,7 @@ Public Function importeJugado(fecha As Date) As Float
     Dim total As Float
 
     For Each apu In ArrayApuestas
-        total += apu.CalculoBenerficio(fecha)
+        total += apu.CalculoBeneficio(fecha)
     Next
 
     Return total

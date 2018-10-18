@@ -6,34 +6,34 @@ Public Sub main()
 
     Print "hola mundo"
 
-    apu = New Apuesta(10, 1.90, Date(2018, 10, 18), ClaseApuesta.normal, "Empate", "99 873")
+    apu = New Apuesta(10, 1.90, Date(2018, 10, 18), TipoApuesta.normal, "Empate", "99 873", "willainhill")
 
     apu.cuota = 1.9
     apu.ImporteApuesta = 10
     apu.fechaEvento = Date(2018, 10, 18)
     Print "Tipo normal:"
-    Print "importe es: (sin poner fecha) ", apu.CalculoBenerficio()
+    Print "importe es: (sin poner fecha) ", apu.CalculoBeneficio()
 
-    Print "importe es: (fecha 2018,10,17)_ ", apu.CalculoBenerficio(Date(2018, 10, 17))
-    Print "importe es: (fecha 2018,10,18): ", apu.CalculoBenerficio(Date(2018, 10, 18))
-    Print "importe es: (fecha 2018,10,19): ", apu.CalculoBenerficio(Date(2018, 10, 19))
+    Print "importe es: (fecha 2018,10,17)_ ", apu.CalculoBeneficio(Date(2018, 10, 17))
+    Print "importe es: (fecha 2018,10,18): ", apu.CalculoBeneficio(Date(2018, 10, 18))
+    Print "importe es: (fecha 2018,10,19): ", apu.CalculoBeneficio(Date(2018, 10, 19))
     'cambio el tipo:
     Print "------------------"
     Print "Cambio de tipo a cubridora:"
-    apu.tipo = ClaseApuesta.cubridora
-    Print "importe es: (sin poner fecha) ", apu.CalculoBenerficio()
+    apu.tipo = TipoApuesta.cubridora
+    Print "importe es: (sin poner fecha) ", apu.CalculoBeneficio()
 
-    Print "importe es: (fecha 2018,10,17)_ ", apu.CalculoBenerficio(Date(2018, 10, 17))
-    Print "importe es: (fecha 2018,10,18): ", apu.CalculoBenerficio(Date(2018, 10, 18))
-    Print "importe es: (fecha 2018,10,19): ", apu.CalculoBenerficio(Date(2018, 10, 19))
+    Print "importe es: (fecha 2018,10,17)_ ", apu.CalculoBeneficio(Date(2018, 10, 17))
+    Print "importe es: (fecha 2018,10,18): ", apu.CalculoBeneficio(Date(2018, 10, 18))
+    Print "importe es: (fecha 2018,10,19): ", apu.CalculoBeneficio(Date(2018, 10, 19))
 
     Print "------------------"
     Print "Cambio de tipo a freebet:"
-    apu.tipo = ClaseApuesta.freebet
-    Print "importe es: (sin poner fecha) ", apu.CalculoBenerficio()
+    apu.tipo = TipoApuesta.freebet
+    Print "importe es: (sin poner fecha) ", apu.CalculoBeneficio()
 
-    Print "importe es: (fecha 2018,10,17)_ ", apu.CalculoBenerficio(Date(2018, 10, 17))
-    Print "importe es: (fecha 2018,10,18): ", apu.CalculoBenerficio(Date(2018, 10, 18))
-    Print "importe es: (fecha 2018,10,19): ", apu.CalculoBenerficio(Date(2018, 10, 19))
+    Print "importe es: (fecha 2018,10,17)_ ", apu.CalculoBeneficio(Date(2018, 10, 17))
+    Print "importe es: (fecha 2018,10,18): ", apu.CalculoBeneficio(Date(2018, 10, 18))
+    Print "importe es: (fecha 2018,10,19): ", apu.CalculoBeneficio(Date(2018, 10, 19))
 
 End

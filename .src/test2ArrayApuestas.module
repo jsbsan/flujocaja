@@ -2,7 +2,6 @@
 
 Public Sub main()
 
-    Dim contador As Integer
     Dim apu As Apuesta
     Dim GestorApuestaTemporal As New GestorApuestas
     Dim a As Integer
@@ -12,7 +11,7 @@ Public Sub main()
 
     'creo 10 apuestas
     For a = 0 To 9
-        apu = New Apuesta(Int(Rnd(1, 10)), 1, Date(2018, 10, Int(Rnd(1, 10))), ClaseApuesta.normal, "", "")
+        apu = New Apuesta(Int(Rnd(1, 10)), 1.9, Date(2018, 10, Int(Rnd(1, 10))), TipoApuesta.freebet, "", "", "")
 
         GestorApuestaTemporal.ArrayApuestas.add(apu)
         apu = Null

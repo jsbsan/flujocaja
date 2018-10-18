@@ -1,5 +1,8 @@
 ' Gambas class file
 
+Property Casa As String ''casa de apuesta donde se ha hecho la apuesta
+Private hcasa As String
+
 Property referencia As String ''nombre o ruta de la referencia de la promocion
 Private hreferencia As String
 
@@ -71,15 +74,15 @@ Public Sub CalculoImporteApuesta(fecha As Date) As Float
 
     Dim beneficio As Float
 
-    If fecha < hfechaEvento Then
-        Return Me.ImporteApuesta
+    If fecha <= hfechaEvento Then
+        Return Me.ImporteApuesta 'el importe apostado todavia no se ha jugado
     Else
-        Return 0
+        Return 0 'el importe apostado ya se ha jugado
     Endif
 
 End
 
-Public Sub CalculoBenerficio(Optional fecha As Date) As Float
+Public Sub CalculoBeneficio(Optional fecha As Date) As Float
 
     Dim beneficio As Float
 
@@ -102,7 +105,7 @@ Public Sub CalculoBenerficio(Optional fecha As Date) As Float
         Return beneficio
     Endif
 
-    If fecha < hfechaEvento Then
+    If fecha <= hfechaEvento Then
         Return 0 'todavia no se ha jugado o es el mismo dia
     Else
 
@@ -136,7 +139,7 @@ Private Sub tipo_Write(Value As Integer)
 
 End
 
-Public Sub _new(Importe As Float, cuota As Float, fecha As Date, tipo As Integer, mercado As String, referencia As String) ''Importe de lo apostado, Cuota de la apuesta,Fecha del evento cuando se juega,tipo [normal,cubridora o freebet]
+Public Sub _new(Importe As Float, cuota As Float, fecha As Date, tipo As Integer, mercado As String, referencia As String, casa As String) ''Importe de lo apostado, Cuota de la apuesta,Fecha del evento cuando se juega,tipo [normal,cubridora o freebet], mercado, referencia a promocion y casa de apuesta donde hago la apuesta
 
     Me.ImporteApuesta = Importe
     Me.cuota = cuota
@@ -144,5 +147,18 @@ Public Sub _new(Importe As Float, cuota As Float, fecha As Date, tipo As Integer
     Me.tipo = tipo
     Me.referencia = referencia
     Me.mercado = mercado
+    Me.casa = casa
+
+End
+
+Private Function Casa_Read() As String
+
+    Return hcasa
+
+End
+
+Private Sub Casa_Write(Value As String)
+
+    hcasa = value
 
 End
