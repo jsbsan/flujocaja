@@ -1,5 +1,7 @@
 ' Gambas class file
 
+Private p As Pie
+
 Public Sub Form_Open()
 
     defineGridViewFuentes()
@@ -9,8 +11,12 @@ Public Sub Form_Open()
     CasasApuestas.Recalculo(GridViewCasasApuestas)
     Fuentes.Recalculo(GridViewFuentes)
 
-    LabelFechaActual.text = Format(Now, "dd-mm-yyyy dddd")
+    LabelFechaActual.text = Format(Now, "yyyy-mm-dd dddd")
     ButtonRecalculo_Click()
+
+    p = New Pie(DrawingArea1, LabelDineroEnJuego.tag, LabelDineroDisponible.tag, 0)
+
+    rellenarContenedorInferior()
 
 End
 
@@ -125,14 +131,19 @@ End
 Public Sub ButtonRecalculo_Click()
 
     Dim sumatorio As Float
+    Dim saldoapostado As Float
 
     sumatorio = GestorFuentesCaja.SumaSaldo()
     sumatorio += GestorCasaDeApuestas.SumaSaldo()
     'recalcular datos de fuentes
     LabelDineroDisponible.text = Format(sumatorio, "$,0.#0")
-    'recalcular datos de casas de apuestas
-    LabelDineroUsable.text = Format(GestorCasaDeApuestas.SumaSaldoApostado(), "$,0.#0")
 
+    LabelDineroDisponible.tag = sumatorio
+
+    'recalcular datos de casas de apuestas
+    saldoapostado = GestorCasaDeApuestas.SumaSaldoApostado()
+    LabelDineroEnJuego.text = Format(saldoapostado, "$,0.#0")
+    LabelDineroEnJuego.tag = saldoapostado
     'y para la estimacion de dinero en juego, comprobar apuestas
 
 End
@@ -140,5 +151,59 @@ End
 Public Sub ButtonCrearApuesta_Click()
 
     FormPromocion.ShowModal()
+
+End
+
+Public Sub DrawingArea1_Draw()
+
+    p.dibujar()
+
+End
+
+Public Sub rellenarContenedorInferior()
+
+    Dim a As Integer
+    Dim Vtmp As VBox
+    Dim dtmp As DrawingArea
+    Dim lverde As Label
+    Dim lamarillo As Label
+    Dim lfecha As Label
+    Dim ldiaSemana As Label
+
+    For a = 0 To 19
+        vtmp = New VBox(HBoxContendorInferior)
+        vtmp.w = 100
+        vtmp.h = 60
+
+        lverde = New Label(vtmp)
+        lverde.w = 50
+        lverde.h = 15
+        lverde.text = "verde"
+        lverde.Background = Color.Green
+        lverde.Alignment = align.Right
+
+        lamarillo = New Label(vtmp)
+        lamarillo.w = 50
+        lamarillo.h = 15
+        lamarillo.text = "amarillo"
+        lamarillo.Background = Color.Yellow
+        lamarillo.Alignment = align.Right
+
+        lfecha = New Label(vtmp)
+        lfecha.w = 50
+        lfecha.h = 15
+        lfecha.text = Format(DateAdd(Now, gb.day, a), "yyyy-mm-dd")
+        lfecha.Background = Color.White
+        lfecha.Border = Border.Plain
+        lfecha.Alignment = Align.Center
+
+        ldiaSemana = New Label(vtmp)
+        ldiaSemana.w = 50
+        ldiaSemana.h = 15
+        ldiaSemana.text = Format(DateAdd(Now, gb.day, a), "dddd")
+        ldiaSemana.Background = Color.White
+        ldiaSemana.Border = Border.Plain
+        ldiaSemana.Alignment = Align.center
+    Next
 
 End

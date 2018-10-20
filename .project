@@ -1,6 +1,6 @@
 # Gambas Project File 3.0
 Title=flujocaja
-Startup=test2ArrayApuestas
+Startup=FMain
 Icon=caja fuerte.jpg
 Version=0.0.1
 Component=gb.image
