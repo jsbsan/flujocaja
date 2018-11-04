@@ -1,5 +1,8 @@
 ' Gambas class file
 
+Property id As String
+Private hid As String
+
 Property Casa As String ''casa de apuesta donde se ha hecho la apuesta
 Private hcasa As String
 
@@ -148,6 +151,7 @@ Public Sub _new(Importe As Float, cuota As Float, fecha As Date, tipo As Integer
     Me.referencia = referencia
     Me.mercado = mercado
     Me.casa = casa
+    Me.id = Format("yymmddhhnnss", Now()) + Int(Rnd(1, 28))
 
 End
 
@@ -160,5 +164,17 @@ End
 Private Sub Casa_Write(Value As String)
 
     hcasa = value
+
+End
+
+Private Function id_Read() As String
+
+    Return hid
+
+End
+
+Private Sub id_Write(Value As String)
+
+    hid = value
 
 End

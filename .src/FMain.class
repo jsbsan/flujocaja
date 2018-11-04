@@ -18,6 +18,8 @@ Public Sub Form_Open()
 
     rellenarContenedorInferior()
 
+    GestorPromocion.cargar(GridViewPromociones)
+
 End
 
 Public Sub defineGridViewFuentes()
@@ -150,7 +152,13 @@ End
 
 Public Sub ButtonCrearApuesta_Click()
 
+    Dim nueva As New Promocion
+
+    FormPromocion.datos = nueva
+
     FormPromocion.ShowModal()
+
+    GestorPromocion.cargar(GridViewPromociones)
 
 End
 
@@ -205,5 +213,20 @@ Public Sub rellenarContenedorInferior()
         ldiaSemana.Border = Border.Plain
         ldiaSemana.Alignment = Align.center
     Next
+
+End
+
+Public Sub GridViewPromociones_DblClick()
+
+    Dim nueva As New Promocion
+    Dim id As String = GridViewPromociones[GridViewPromociones.Row, 1].text
+    Dim modo As New String[]
+
+    modo.Add("editor")
+    FormPromocion.datos = GestorPromocion.obtener(id)
+    FormPromocion.modo = modo
+    FormPromocion.ShowModal()
+
+    GestorPromocion.cargar(GridViewPromociones)
 
 End

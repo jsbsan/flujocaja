@@ -1,8 +1,104 @@
 ' Gambas class file
 
+Public datos As Promocion
+Public modo As String[]
+
 Public Sub Form_Open()
 
-        ComboBoxCasa.list = Split(File.Load("casas.txt"), "\n")
+    ComboBoxCasa.list = Split(File.Load("casas.txt"), "\n")
+    ComboBoxEstado.list = ["Nueva", "En Juego", "En Freebet", "Terminada"]
 
+    If Not IsNull(modo) Then
+        Me.Title = "Editando..."
+        TextBoxId.text = datos.id
+
+        ComboBoxCasa.Text = datos.CasaApuesta
+        TextBoxNombre.Text = datos.NombrePromociona
+        TextAreaResumenReglas.Text = datos.observaciones
+        textBoxHojaCalculo.Text = datos.rutafichero
+        DateBoxInicio.Value = datos.fechaFinal
+        DateBoxFinal.Value = datos.fechaInicio
+
+        ComboBoxEstado.text = Choose(datos.estado + 1, "Nueva", "En Juego", "En Freebet", "Terminada")
+
+    Else
+        Me.title = "Nueva..."
+        TextBoxId.text = datos.id
+        ComboBoxEstado.text = "Nueva"
+    Endif
+
+    TextBoxId.ReadOnly = True
+
+End
+
+Public Sub ButtonBorradoHojaCalculo2_Click()
+
+    If Not Dialog.OpenFile() Then
+        TextBoxHojaCalculo.text = Dialog.Path
+    Endif
+
+End
+
+Public Sub ButtonBorradoHojaCalculo_Click()
+
+    TextBoxHojaCalculo.text = ""
+
+End
+
+Public Sub ButtonGuardar2_Click()
+
+    Me.Close()
+
+End
+
+Public Sub ButtonGuardar_Click()
+
+    If IsNull(modo) Then
+
+        datos.CasaApuesta = ComboBoxCasa.Text
+        datos.NombrePromociona = TextBoxNombre.Text
+        datos.observaciones = TextAreaResumenReglas.Text
+        datos.rutafichero = TextBoxHojaCalculo.Text
+        datos.fechaFinal = DateBoxInicio.Value
+        datos.fechaInicio = DateBoxFinal.Value
+
+        Select Case ComboBoxEstado.text
+            Case "Nueva"
+                datos.estado = 0
+            Case "En Juego"
+                datos.estado = 1
+            Case "En Freebet"
+                datos.estado = 2
+            Case "Terminada"
+                datos.estado = 3
+        End Select
+
+        GestorPromocion.guardar(datos)
+    Else
+
+        datos.CasaApuesta = ComboBoxCasa.Text
+        datos.NombrePromociona = TextBoxNombre.Text
+        datos.observaciones = TextAreaResumenReglas.Text
+        datos.rutafichero = TextBoxHojaCalculo.Text
+        datos.fechaFinal = DateBoxInicio.Value
+        datos.fechaInicio = DateBoxFinal.Value
+        datos.id = TextBoxId.text
+        Select Case ComboBoxEstado.text
+            Case "Nueva"
+                datos.estado = 0
+            Case "En Juego"
+                datos.estado = 1
+            Case "En Freebet"
+                datos.estado = 2
+            Case "Terminada"
+                datos.estado = 3
+        End Select
+        GestorPromocion.Editando(datos)
+
+    Endif
+
+    'test
+    GestorPromocion.leer()
+    Me.Close()
 
 End

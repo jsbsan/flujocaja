@@ -1,0 +1,119 @@
+' Gambas class file
+
+Create Static
+
+Public listaPromociones As Promocion[]
+
+Private rutafichero As String = User.home & "/.ControlFlujoCaja" & "/promociones.datos"
+
+Private separador As String = Chr$(177) '"@|@"
+
+Public Sub guardar(p As Promocion)
+
+    Dim contenido As String
+
+    If Not Exist(rutafichero) Then
+        Try Mkdir User.home & "/.ControlFlujoCaja"
+        File.Save(rutafichero, "")
+    Endif
+
+    contenido = File.Load(rutafichero)
+
+    contenido &= p.contenido() & separador
+
+    File.Save(rutafichero, contenido)
+
+End
+
+Public Sub editando(p As Promocion)
+
+    Dim contenido As String
+    Dim ptmp As Promocion
+
+    For Each ptmp In listaPromociones
+        If ptmp.id = p.id Then
+            ptmp.fechaFinal = p.fechaFinal
+            ptmp.fechaInicio = p.fechaInicio
+            ptmp.rutafichero = p.rutafichero
+            ptmp.observaciones = p.observaciones
+            ptmp.NombrePromociona = p.NombrePromociona
+            ptmp.CasaApuesta = p.CasaApuesta
+
+            Break
+        Endif
+    Next
+
+    'guardo datos...
+    For Each ptmp In listaPromociones
+        contenido &= ptmp.contenido() & separador
+    Next
+
+    File.Save(rutafichero, contenido)
+
+End
+
+Public Sub leer()
+
+    Dim contenido As String
+    Dim lineas As String[]
+    Dim ptmp As Promocion
+
+    lineas = Split(File.Load(rutafichero), separador)
+
+    listaPromociones = New Promocion[]
+
+    For Each contenido In lineas
+
+        ptmp = New Promocion
+        If contenido <> "" Then
+
+            ptmp.carga(contenido)
+
+            listaPromociones.Add(ptmp)
+        Endif
+    Next
+
+    'cargado !!!
+
+End
+
+Public Sub cargar(rejilla As GridView)
+
+    Dim p As Promocion
+    Dim contador As Integer
+
+    leer()
+
+    For Each p In listaPromociones
+
+        With rejilla
+            .rows.count = contador + 1
+            .[contador, 0].text = p.beneficio
+            .[contador, 1].text = p.id 'o poner los 6 primeros caracteres del archivo excel
+            .[contador, 1].alignment = Align.Right
+            .[contador, 2].text = Choose(p.estado + 1, "Nueva", "En Juego", "Uso Freebet", "Terminada") '0 nueva (sin asignar apuestas), 1 en juego (con apuestas asignada),2 en juego freebet, 3 vendida (terminada)
+            .[contador, 3].text = p.CasaApuesta
+            .[contador, 4].text = p.NombrePromociona
+
+            'poner color segun estado.
+            .[contador, 0].background = Choose(p.estado + 1, Color.white, Color.red, Color.Orange, Color.white)
+            .[contador, 2].background = Choose(p.estado + 1, Color.White, Color.White, Color.Yellow, Color.White)
+
+        End With
+        contador += 1
+
+    Next
+
+End
+
+Public Function obtener(id As String) As Promocion
+
+    Dim p As Promocion
+
+    For Each p In listaPromociones
+        If p.id = id Then Return p
+    Next
+
+    Message.Info("id no encontrado en las promociones....")
+
+End

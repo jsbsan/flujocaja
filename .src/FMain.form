@@ -122,6 +122,8 @@
     Border = Border.Plain
     { GridViewPromociones GridView
       MoveScaled(1,4,57,43)
+      Mode = Select.Single
+      ShowCursor = True
     }
     { Label7 Label
       MoveScaled(10,0,29,4)

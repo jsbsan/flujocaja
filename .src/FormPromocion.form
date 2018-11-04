@@ -19,8 +19,11 @@
     MoveScaled(46,8,14,5)
     Text = ("Nº Identificativo:")
   }
-  { TextBox1 TextBox
-    MoveScaled(62,8,9,6)
+  { TextBoxId TextBox
+    MoveScaled(62,8,25,5)
+    Background = Color.Background
+    Alignment = Align.Center
+    ReadOnly = True
   }
   { Label4 Label
     MoveScaled(3,43,20,5)
@@ -30,42 +33,64 @@
     MoveScaled(3,16,21,5)
     Text = ("Nombre de Promoción:")
   }
-  { TextBox2 TextBox
+  { TextBoxNombre TextBox
     MoveScaled(24,16,65,5)
   }
-  { Label6 Label
-    MoveScaled(3,23,15,5)
-    Text = ("Reglas Promoción:")
-  }
   { TextAreaResumenReglas TextArea
-    MoveScaled(3,32,86,9)
+    MoveScaled(3,26,86,15)
+    Wrap = True
   }
   { Label7 Label
     MoveScaled(3,49,20,6)
     Text = ("Periodo de Valided:")
   }
-  { DateBox1 DateBox
+  { DateBoxInicio DateBox
     MoveScaled(17,55,22,4)
+    Mode = DateChooser.DateTime
   }
-  { DirBox1 DirBox
-    MoveScaled(24,23,19,4)
-  }
-  { DirBox2 DirBox
-    MoveScaled(24,43,28,4)
-  }
-  { DateBox2 DateBox
-    MoveScaled(50,55,20,4)
+  { DateBoxFinal DateBox
+    MoveScaled(17,59,22,4)
+    Mode = DateChooser.DateTime
   }
   { Label8 Label
-    MoveScaled(3,29,12,3)
+    MoveScaled(3,22,12,3)
     Text = ("Resumen:")
   }
   { Label9 Label
-    MoveScaled(40,55,9,5)
+    MoveScaled(6,59,9,5)
     Text = ("hasta") & "..."
   }
   { Label10 Label
     MoveScaled(6,55,9,5)
     Text = ("desde.") & "..."
+  }
+  { TextBoxHojaCalculo TextBox
+    MoveScaled(22,43,49,5)
+  }
+  { ButtonBorradoHojaCalculo Button
+    MoveScaled(72,43,3,4)
+    Picture = Picture["icon:/16/clear"]
+  }
+  { ButtonBorradoHojaCalculo2 Button
+    MoveScaled(75,43,11,4)
+    Text = ("fichero")
+    Picture = Picture["icon:/16/file"]
+  }
+  { ButtonGuardar Button
+    MoveScaled(75,59,13,4)
+    Text = ("Guardar")
+    Picture = Picture["icon:/16/save"]
+  }
+  { ButtonGuardar2 Button
+    MoveScaled(75,50,13,4)
+    Text = ("Cancelar")
+    Picture = Picture["icon:/16/cancel"]
+  }
+  { Label6 Label
+    MoveScaled(44,51,8,3)
+    Text = ("Estado:")
+  }
+  { ComboBoxEstado ComboBox
+    MoveScaled(52,50,16,4)
   }
 }

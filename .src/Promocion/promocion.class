@@ -1,0 +1,86 @@
+' Gambas class file
+
+Public id As String
+Public CasaApuesta As String
+Public NombrePromociona As String
+Public rutafichero As String
+Public observaciones As String
+Public estado As Integer '0 nueva (sin asignar apuestas), 1 en juego (con apuestas asignada),2 en juego freebet, 3 vendida (terminada)
+Public beneficio As Float
+Public fechaInicio As Date
+Public fechaFinal As Date
+
+Public Sub _new()
+
+    id = Format(Now, "yyyymmddhhnnss") & Chr$(Int(Rnd(65, 90))) & Chr$(Int(Rnd(65, 90))) & Chr$(Int(Rnd(65, 90)))
+
+End
+
+Public Function contenido() As String
+
+    Dim texto As String
+
+    texto &= id & "|"
+    texto &= CasaApuesta & "|"
+    texto &= NombrePromociona & "|"
+    texto &= rutafichero & "|"
+    texto &= Replace(observaciones, "\n", Chr$(219)) & "|"
+    texto &= Str$(estado) & "|"
+    texto &= Str$(beneficio) & "|"
+    texto &= convierteFechaTexto(fechaInicio) & "|"
+    texto &= convierteFechaTexto(fechaFinal)
+    Return texto
+
+End
+
+Public Sub carga(t As String)
+
+    Dim lineas As String[]
+
+    lineas = Split(t, "|")
+    id = lineas[0]
+    CasaApuesta = lineas[1]
+    NombrePromociona = lineas[2]
+    rutafichero = lineas[3]
+    observaciones = Replace(lineas[4], Chr$(219), "\n")
+    estado = Val(lineas[5])
+    beneficio = Val(lineas[6])
+    fechaInicio = convierteTextoFecha(lineas[7])
+    fechaFinal = convierteTextoFecha(lineas[8])
+
+End
+
+Public Function convierteFechaTexto(d As Date) As String
+
+    Dim contenido As String
+
+    contenido = Str$(Year(d)) & "-"
+    contenido &= Str$(Month(d)) & "-"
+    contenido &= Str$(Day(d)) & "-"
+    contenido &= Str$(Hour(d)) & "-"
+    contenido &= Str$(Minute(d)) & "-"
+    contenido &= Str$(Second(d))
+
+    Return contenido
+
+End
+
+Public Function convierteTextoFecha(t As String) As Date
+
+    Dim contenido As String[]
+    Dim datetmp As Date
+    Dim yy, mm, dd, hh, nn, ss As String
+
+    contenido = Split(t, "-")
+    yy = contenido[0]
+    mm = contenido[1]
+    dd = contenido[2]
+    hh = contenido[3]
+    nn = contenido[4]
+    ss = contenido[5]
+
+    datetmp = Date(Val(yy), Val(mm), Val(dd), Val(hh), Val(nn), Val(ss))
+
+    Return datetmp
+
+End
